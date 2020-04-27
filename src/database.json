@@ -1,0 +1,31 @@
+{
+  "123": {
+    "nome": "batata",
+    "valor": 1.00
+  },
+  "156": {
+    "nome": "papel higienico",
+    "valor": 10.00
+  },
+  "126": {
+    "nome": "alcool e gel",
+    "valor": 8.00
+  },
+  "128": {
+    "nome": "pasta de dente",
+    "valor": 2.20
+  },
+  "129": {
+    "nome": "cerveja",
+    "valor": 1.30
+  },
+  "135": {
+    "nome": "lapis",
+    "valor": 0.30
+  },
+  "131": {
+    "nome": "caderno",
+    "valor": 10.00
+  }
+
+}
