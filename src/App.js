@@ -12,7 +12,7 @@ class App extends Component {
             products: [],
             valorTotal: 0,
             visible: false,
-            off: false,
+            off: 0,
             comprovante: [],
             total: 0
         };
@@ -114,7 +114,7 @@ class App extends Component {
     }
 
     render() {
-        if (this.state.off) {
+        if (this.state.off === 2) {
             return (
                 <ul>
                     <h1>Comprovante</h1>
@@ -124,51 +124,60 @@ class App extends Component {
                         </li>
                     ))}
                     <li>Total: {this.state.total}</li>
-                    <button onClick={() => this.setState({off: false})}>Abrir caixa</button>
+                    <button onClick={() => this.setState({off: 0})}>Tela inicial</button>
                 </ul>
             )
         } else {
-            return (
-                <div className="App">
-                    <Modal visible={this.state.visible} width="400" height="200" effect="fadeInUp"
-                           onClickAway={() => this.closeModal()}>
-                        <div>
-                            <h1>A compra não pode realizada</h1>
-                            <button onClick={() => this.closeModal()}>Fechar</button>
-                        </div>
-                    </Modal>
+            if (this.state.off === 1) {
+                return (
+                    <div className="App">
+                        <Modal visible={this.state.visible} width="400" height="200" effect="fadeInUp"
+                               onClickAway={() => this.closeModal()}>
+                            <div>
+                                <h1>A compra não pode realizada</h1>
+                                <button onClick={() => this.closeModal()}>Fechar</button>
+                            </div>
+                        </Modal>
 
-                    <h1>Products Manager</h1>
-                    <button onClick={() => this.pagar("dinheiro")}>Pagar com dinheiro</button>
-                    <button onClick={() => this.pagar("cartao")}>Pagar com cartao</button>
-                    <button onClick={() => this.clear()}>Esvaziar carrinho</button>
-                    <button onClick={() => {
-                        this.close();
-                        this.setState({off: true})
-                    }}>Fechar caixa
-                    </button>
-                    <AddProduct
-                        onAdd={this.onAdd}
-                    />
-                    Preço do carrinho {this.formatMoney(this.state.valorTotal)}
+                        <h1>Products Manager</h1>
+                        <button onClick={() => this.pagar("dinheiro")}>Pagar com dinheiro</button>
+                        <button onClick={() => this.pagar("cartao")}>Pagar com cartao</button>
+                        <button onClick={() => this.clear()}>Esvaziar carrinho</button>
+                        <button onClick={() => {
+                            this.close();
+                            this.setState({off: 2})
+                        }}>Fechar caixa
+                        </button>
+                        <AddProduct
+                            onAdd={this.onAdd}
+                        />
+                        Preço do carrinho {this.formatMoney(this.state.valorTotal)}
+                        <ul>
+                            {
+                                this.state.products.map((product, index) => {
+                                    return (
+                                        <li key={`${index}`}>
+                                            <ProductItem
+                                                id={`${index}`}
+                                                nome={product.nome}
+                                                price={product.valor}
+                                                onDelete={this.onDelete}
+                                            />
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>
+                );
+            } else {
+                return (
                     <ul>
-                        {
-                            this.state.products.map((product, index) => {
-                                return (
-                                    <li key={`${index}`}>
-                                        <ProductItem
-                                            id={`${index}`}
-                                            nome={product.nome}
-                                            price={product.valor}
-                                            onDelete={this.onDelete}
-                                        />
-                                    </li>
-                                )
-                            })
-                        }
+                        <h1>Inicio</h1>
+                        <button onClick={() => this.setState({off: 1})}>Abrir caixa</button>
                     </ul>
-                </div>
-            );
+                )
+            }
         }
     }
 }
