@@ -9,8 +9,6 @@ class App extends Component {
 
         this.state = {
             products: []
-
-
         };
         this.onAdd = this.onAdd.bind(this);
         this.onDelete = this.onDelete.bind(this);
@@ -63,19 +61,22 @@ class App extends Component {
                     onAdd={this.onAdd}
                 />
 
-
-                {
-                    this.state.products.map(product => {
-                        return (
-                            <ProductItem
-                                key={product.nome}
-                                name={product.nome}
-                                price={product.valor}
-                                onDelete={this.onDelete}
-                            />
-                        )
-                    })
-                }
+                <ul>
+                    {
+                        this.state.products.map(product => {
+                            return (
+                                <li>
+                                    <ProductItem
+                                        key={product.nome}
+                                        name={product.nome}
+                                        price={product.valor}
+                                        onDelete={this.onDelete}
+                                    />
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
             </div>
         );
     }
