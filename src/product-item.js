@@ -14,16 +14,14 @@ class ProductItem extends Component {
     }
 
     render() {
-        const {nome, price, id} = this.props;
+        const {nome, price} = this.props;
         return (
             <div>
-                <span>id {id}</span>
-                {` | `}
                 <span>{nome}</span>
                 {` | `}
-                <span>{price}</span>
+                <span>{price.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
                 {` | `}
-                <button onClick={this.onDelete}>Delete</button>
+                <button className="buttonR" onClick={this.onDelete}>Delete</button>
             </div>
 
         );

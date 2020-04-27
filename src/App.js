@@ -12,14 +12,18 @@ class App extends Component {
             products: [],
             valorTotal: 0,
             visible: false,
+            card: false,
             off: 0,
             comprovante: [],
             total: 0,
             open: "",
-            close: ""
+            close: "",
+            value: "",
+            numero: ""
         };
         this.onAdd = this.onAdd.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.handleData = this.handleData.bind(this)
     }
 
     componentDidMount() {
@@ -68,7 +72,13 @@ class App extends Component {
         return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
+    pay() {
+        this.setState({numero: ""})
+        this.setState({card: true});
+    }
+
     pagar(tipo) {
+
         fetch('http://localhost:5000/pagar', {
             method: 'POST',
             headers: {
@@ -77,14 +87,17 @@ class App extends Component {
             body: JSON.stringify({
                 "carrinho": this.state.products,
                 "total": this.state.valorTotal,
-                "tipo": tipo
+                "tipo": tipo,
+                "numero": this.state.numero
             })
         }).then(res => res.text()).then(res => {
             if (res === "true") {
                 this.setState({products: []});
                 this.setState({valorTotal: 0});
+                this.setState({card: false})
             } else {
                 this.openModal()
+                this.setState({card: false})
             }
         })
     }
@@ -105,7 +118,7 @@ class App extends Component {
             this.total()
         })
         var date = new Date();
-        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
         this.setState({close: str});
     }
@@ -118,7 +131,7 @@ class App extends Component {
         this.setState({total: this.formatMoney(t)})
     }
 
-    inicia(){
+    inicia() {
         this.setState({off: 1})
         this.clear()
         fetch('http://localhost:5000/init', {
@@ -129,11 +142,16 @@ class App extends Component {
         }).then(res => res.text()).then(res => this.setState({open: res}))
     }
 
+    handleData(event) {
+        this.setState({numero: event.target.value})
+    }
+
     render() {
         if (this.state.off === 2) {
             return (
-                <ul>
-                    <h1>Comprovante</h1>
+                <ul className="App">
+                    <h1 className="App">Comprovante</h1>
+                    <br/>
                     {this.state.comprovante.map((list, index) => (
                         <li key={`${index}`}>
                             {this.formatMoney(list.total)} / {list.tipo}
@@ -142,7 +160,8 @@ class App extends Component {
                     <li>Total: {this.state.total}</li>
                     <li>Horario de abertura: {this.state.open}</li>
                     <li>Horario de encerramento: {this.state.close}</li>
-                    <button class="button" onClick={() => this.setState({off: 0})}>Tela inicial</button>
+                    <br/>
+                    <button className="button" onClick={() => this.setState({off: 0})}>Tela inicial</button>
                 </ul>
             )
         } else {
@@ -153,15 +172,27 @@ class App extends Component {
                                onClickAway={() => this.closeModal()}>
                             <div>
                                 <h1>A compra não pode realizada</h1>
-                                <button class="button" onClick={() => this.closeModal()}>Fechar</button>
+                                <button className="button" onClick={() => this.closeModal()}>Fechar</button>
+                            </div>
+                        </Modal>
+
+                        <Modal visible={this.state.card} width="400" height="200" effect="fadeInUp"
+                               onClickAway={() => this.setState({card: false})}>
+                            <div>
+                                <h1>Digite os dados do cartao</h1>
+                                <input
+                                    type='text'
+                                    onChange={this.handleData}
+                                />
+                                <button className="button" onClick={() => this.pagar("cartao")}>Pagar</button>
                             </div>
                         </Modal>
 
                         <h1>Products Manager</h1>
-                        <button class="button" onClick={() => this.pagar("dinheiro")}>Pagar com dinheiro</button>
-                        <button class="button" onClick={() => this.pagar("cartao")}>Pagar com cartao</button>
-                        <button class="button" onClick={() => this.clear()}>Esvaziar carrinho</button>
-                        <button class="button" onClick={() => {
+                        <button className="button" onClick={() => this.pagar("dinheiro")}>Pagar com dinheiro</button>
+                        <button className="button" onClick={() => this.pay()}>Pagar com cartao</button>
+                        <button className="button" onClick={() => this.clear()}>Esvaziar carrinho</button>
+                        <button className="button" onClick={() => {
                             this.close();
                             this.setState({off: 2})
                         }}>Fechar caixa
@@ -169,7 +200,7 @@ class App extends Component {
                         <AddProduct
                             onAdd={this.onAdd}
                         />
-                        Preço do carrinho {this.formatMoney(this.state.valorTotal)}
+                        <h3>Preço do carrinho {this.formatMoney(this.state.valorTotal)}</h3>
                         <ul>
                             {
                                 this.state.products.map((product, index) => {
@@ -190,10 +221,10 @@ class App extends Component {
                 );
             } else {
                 return (
-                    <ul>
+                    <div className="App">
                         <h1>Inicio</h1>
-                        <button class="button" onClick={() => this.inicia()}>Abrir caixa</button>
-                    </ul>
+                        <button className="button" onClick={() => this.inicia()}>Abrir caixa</button>
+                    </div>
                 )
             }
         }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import './App.css';
 
 class AddProduct extends Component {
     constructor(props) {
@@ -20,8 +20,8 @@ class AddProduct extends Component {
         return (
             <form onSubmit={this.onSubmit}>
                 <h3>Add Product</h3>
-                <input placeholder="ID do produto" ref={nameInput => this.nameInput = nameInput}/>
-                <button>Add</button>
+                <input type="text" size="80" placeholder="ID do produto" ref={nameInput => this.nameInput = nameInput}/>
+                <button className="button">Add</button>
                 <hr/>
             </form>
         );

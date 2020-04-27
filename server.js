@@ -16,6 +16,7 @@ app.post('/getProduto', function (req, res) {
 });
 
 app.post('/pagar', function (req, res) {
+    console.log(req.body.numero)
     if (req.body.carrinho.length == 0) {
         res.send(false)
     } else {
