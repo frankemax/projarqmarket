@@ -8,7 +8,7 @@
 ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: auto;
 }
 
 ul li {
@@ -16,6 +16,11 @@ ul li {
   margin-top: -1px; /* Prevent double borders */
   background-color: #f6f6f6;
   padding: 12px;
+  width: 350px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 .App-logo {
