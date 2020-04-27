@@ -23,14 +23,11 @@ class App extends Component {
     componentDidMount() {
     }
 
-    onDelete(name) {
+    onDelete(id) {
         const products = this.state.products;
-
-        const filteredProducts = products.filter(product => {
-            return product.nome !== name;
-        });
-
-        this.setState({products: filteredProducts});
+        this.setState({valorTotal: this.state.valorTotal - products[id].valor});
+        delete products[id];
+        this.setState({products: products});
 
     }
 
@@ -97,7 +94,6 @@ class App extends Component {
     }
 
     close() {
-        console.log("porra")
         fetch('http://localhost:5000/close', {
             method: 'POST',
             headers: {
@@ -122,8 +118,8 @@ class App extends Component {
             return (
                 <ul>
                     <h1>Comprovante</h1>
-                    {this.state.comprovante.map(list => (
-                        <li key={list}>
+                    {this.state.comprovante.map((list, index) => (
+                        <li key={`${index}`}>
                             {this.formatMoney(list.total)} / {list.tipo}
                         </li>
                     ))}
@@ -157,10 +153,11 @@ class App extends Component {
                     Preço do carrinho {this.formatMoney(this.state.valorTotal)}
                     <ul>
                         {
-                            this.state.products.map(product => {
+                            this.state.products.map((product, index) => {
                                 return (
-                                    <li key={product.nome}>
+                                    <li key={`${index}`}>
                                         <ProductItem
+                                            id={`${index}`}
                                             nome={product.nome}
                                             price={product.valor}
                                             onDelete={this.onDelete}

@@ -9,15 +9,17 @@ class ProductItem extends Component {
     }
 
     onDelete() {
-        const {onDelete, nome} = this.props;
-        onDelete(nome);
+        const {onDelete, id} = this.props;
+        onDelete(id);
     }
 
     render() {
-        const {nome, price} = this.props;
+        const {nome, price, id} = this.props;
         return (
             <div>
                 <span>{nome}</span>
+                {` | `}
+                <span>{id}</span>
                 {` | `}
                 <span>{price}</span>
                 {` | `}
