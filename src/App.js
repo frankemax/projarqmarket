@@ -31,7 +31,7 @@ class App extends Component {
     this.onDelete = this.onDelete.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const products = this.getProducts();
 
     this.setState({ products });
