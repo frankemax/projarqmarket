@@ -17,9 +17,9 @@ class ProductItem extends Component {
         const {nome, price, id} = this.props;
         return (
             <div>
-                <span>{nome}</span>
+                <span>id {id}</span>
                 {` | `}
-                <span>{id}</span>
+                <span>{nome}</span>
                 {` | `}
                 <span>{price}</span>
                 {` | `}

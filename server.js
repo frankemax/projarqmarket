@@ -37,6 +37,19 @@ app.post('/close', function (req, res) {
     res.send(caixa)
 });
 
+app.post('/init', function (req, res) {
+    caixa["compras"] = []
+    fs.writeFileSync('./src/caixa.json', JSON.stringify(caixa));
+    res.send(getFormattedDate())
+});
+
+function getFormattedDate() {
+    var date = new Date();
+    var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+    return str;
+}
+
 function verify() {
     var x = Math.random() * (100 - 0) + 0;
     if (x < 10) {

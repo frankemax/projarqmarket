@@ -14,7 +14,9 @@ class App extends Component {
             visible: false,
             off: 0,
             comprovante: [],
-            total: 0
+            total: 0,
+            open: "",
+            close: ""
         };
         this.onAdd = this.onAdd.bind(this);
         this.onDelete = this.onDelete.bind(this);
@@ -28,7 +30,6 @@ class App extends Component {
         this.setState({valorTotal: this.state.valorTotal - products[id].valor});
         delete products[id];
         this.setState({products: products});
-
     }
 
     openModal() {
@@ -103,6 +104,10 @@ class App extends Component {
             this.setState({comprovante: JSON.parse(res).compras});
             this.total()
         })
+        var date = new Date();
+        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+        this.setState({close: str});
     }
 
     total() {
@@ -111,6 +116,17 @@ class App extends Component {
             t += this.state.comprovante[i].total
         }
         this.setState({total: this.formatMoney(t)})
+    }
+
+    inicia(){
+        this.setState({off: 1})
+        this.clear()
+        fetch('http://localhost:5000/init', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => this.setState({open: res}))
     }
 
     render() {
@@ -124,7 +140,9 @@ class App extends Component {
                         </li>
                     ))}
                     <li>Total: {this.state.total}</li>
-                    <button onClick={() => this.setState({off: 0})}>Tela inicial</button>
+                    <li>Horario de abertura: {this.state.open}</li>
+                    <li>Horario de encerramento: {this.state.close}</li>
+                    <button class="button" onClick={() => this.setState({off: 0})}>Tela inicial</button>
                 </ul>
             )
         } else {
@@ -135,15 +153,15 @@ class App extends Component {
                                onClickAway={() => this.closeModal()}>
                             <div>
                                 <h1>A compra não pode realizada</h1>
-                                <button onClick={() => this.closeModal()}>Fechar</button>
+                                <button class="button" onClick={() => this.closeModal()}>Fechar</button>
                             </div>
                         </Modal>
 
                         <h1>Products Manager</h1>
-                        <button onClick={() => this.pagar("dinheiro")}>Pagar com dinheiro</button>
-                        <button onClick={() => this.pagar("cartao")}>Pagar com cartao</button>
-                        <button onClick={() => this.clear()}>Esvaziar carrinho</button>
-                        <button onClick={() => {
+                        <button class="button" onClick={() => this.pagar("dinheiro")}>Pagar com dinheiro</button>
+                        <button class="button" onClick={() => this.pagar("cartao")}>Pagar com cartao</button>
+                        <button class="button" onClick={() => this.clear()}>Esvaziar carrinho</button>
+                        <button class="button" onClick={() => {
                             this.close();
                             this.setState({off: 2})
                         }}>Fechar caixa
@@ -174,7 +192,7 @@ class App extends Component {
                 return (
                     <ul>
                         <h1>Inicio</h1>
-                        <button onClick={() => this.setState({off: 1})}>Abrir caixa</button>
+                        <button class="button" onClick={() => this.inicia()}>Abrir caixa</button>
                     </ul>
                 )
             }
