@@ -181,8 +181,9 @@ class App extends Component {
                             <div>
                                 <h1>Digite os dados do cartao</h1>
                                 <input
-                                    type='text'
                                     onChange={this.handleData}
+                                    type='text'
+                                    value = {this.state.numero}
                                 />
                                 <button className="button" onClick={() => this.pagar("cartao")}>Pagar</button>
                             </div>

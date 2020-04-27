@@ -20,7 +20,7 @@ class AddProduct extends Component {
         return (
             <form onSubmit={this.onSubmit}>
                 <h3>Add Product</h3>
-                <input type="text" size="80" placeholder="ID do produto" ref={nameInput => this.nameInput = nameInput}/>
+                <input type="text" size="50" placeholder="ID do produto" ref={nameInput => this.nameInput = nameInput}/>
                 <button className="button">Add</button>
                 <hr/>
             </form>
