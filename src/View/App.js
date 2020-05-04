@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ProductItem from './product-item';
-import AddProduct from '../Controller/AddProduct';
+import AddProduct from './AddProduct';
 import './App.css';
 import Modal from 'react-awesome-modal';
 

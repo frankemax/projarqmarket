@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../View/App.css';
+import './App.css';
 
 class AddProduct extends Component {
     constructor(props) {

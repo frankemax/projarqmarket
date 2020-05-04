@@ -1,1 +1,18 @@
-{"compras":[{"tipo":"cartao","total":1,"carrinho":[{"nome":"batata","valor":1}]}]}
+{
+  "compras": [
+    {
+      "tipo": "dinheiro",
+      "total": 3.2,
+      "carrinho": [
+        {
+          "nome": "pasta de dente",
+          "valor": 2.2
+        },
+        {
+          "nome": "batata",
+          "valor": 1
+        }
+      ]
+    }
+  ]
+}
