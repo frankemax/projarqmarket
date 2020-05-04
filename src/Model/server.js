@@ -1,6 +1,6 @@
 const express = require('express');
-const data = require("./src/database.json")
-const caixa = require("./src/caixa.json")
+const data = require("../Database/database.json")
+const caixa = require("../Database/caixa.json")
 var cors = require('cors');
 var bodyParser = require('body-parser')
 const fs = require('fs');
@@ -28,7 +28,7 @@ app.post('/pagar', function (req, res) {
                 "total": req.body.total,
                 "carrinho": req.body.carrinho
             })
-            fs.writeFileSync('./src/caixa.json', JSON.stringify(caixa));
+            fs.writeFileSync('./src/Database/caixa.json', JSON.stringify(caixa));
             res.send(true)
         }
     }
@@ -40,7 +40,7 @@ app.post('/close', function (req, res) {
 
 app.post('/init', function (req, res) {
     caixa["compras"] = []
-    fs.writeFileSync('./src/caixa.json', JSON.stringify(caixa));
+    fs.writeFileSync('./src/Database/caixa.json', JSON.stringify(caixa));
     res.send(getFormattedDate())
 });
 

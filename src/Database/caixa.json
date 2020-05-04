@@ -1,0 +1,40 @@
+{
+  "compras": [
+    {
+      "tipo": "dinheiro",
+      "total": 6.2,
+      "carrinho": [
+        {
+          "nome": "batata",
+          "valor": 1
+        },
+        {
+          "nome": "batata",
+          "valor": 1
+        },
+        {
+          "nome": "batata",
+          "valor": 1
+        },
+        {
+          "nome": "batata",
+          "valor": 1
+        },
+        {
+          "nome": "pasta de dente",
+          "valor": 2.2
+        }
+      ]
+    },
+    {
+      "tipo": "cartao",
+      "total": 1,
+      "carrinho": [
+        {
+          "nome": "batata",
+          "valor": 1
+        }
+      ]
+    }
+  ]
+}

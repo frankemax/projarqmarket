@@ -20,7 +20,7 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "nodemon src/Model/server.js",
     "client": "react-scripts start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
