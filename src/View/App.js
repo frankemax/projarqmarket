@@ -19,11 +19,13 @@ class App extends Component {
             open: "",
             close: "",
             value: "",
-            numero: ""
+            numero: "",
+            pin: ""
         };
         this.onAdd = this.onAdd.bind(this);
         this.onDelete = this.onDelete.bind(this);
-        this.handleData = this.handleData.bind(this)
+        this.handleNumero = this.handleNumero.bind(this)
+        this.handlePin = this.handlePin.bind(this)
     }
 
     componentDidMount() {
@@ -74,6 +76,7 @@ class App extends Component {
 
     pay() {
         this.setState({numero: ""})
+        this.setState({pin: ""})
         this.setState({card: true});
     }
 
@@ -88,7 +91,8 @@ class App extends Component {
                 "carrinho": this.state.products,
                 "total": this.state.valorTotal,
                 "tipo": tipo,
-                "numero": this.state.numero
+                "numero": this.state.numero,
+                "pin" : this.state.pin
             })
         }).then(res => res.text()).then(res => {
             if (res === "true") {
@@ -142,8 +146,12 @@ class App extends Component {
         }).then(res => res.text()).then(res => this.setState({open: res}))
     }
 
-    handleData(event) {
-        this.setState({numero: event.target.value})
+    handleNumero(event) {
+        this.setState({numero: event.target.value} )
+    }
+
+    handlePin(event) {
+        this.setState({pin: event.target.value} )
     }
 
     render() {
@@ -176,14 +184,21 @@ class App extends Component {
                             </div>
                         </Modal>
 
-                        <Modal visible={this.state.card} width="400" height="200" effect="fadeInUp"
+                        <Modal visible={this.state.card} width="450" height="275" effect="fadeInUp"
                                onClickAway={() => this.setState({card: false})}>
                             <div>
                                 <h1>Digite os dados do cartao</h1>
                                 <input
-                                    onChange={this.handleData}
+                                    onChange={this.handleNumero}
+                                    placeholder="Número do Cartão"
                                     type='text'
                                     value = {this.state.numero}
+                                />
+                                <input
+                                    onChange={this.handlePin}
+                                    placeholder="PIN de Segurança"
+                                    type='text'
+                                    value = {this.state.pin}
                                 />
                                 <button className="button" onClick={() => this.pagar("cartao")}>Pagar</button>
                             </div>

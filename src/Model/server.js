@@ -16,11 +16,11 @@ app.post('/getProduto', function (req, res) {
 });
 
 app.post('/pagar', function (req, res) {
-    console.log(req.body.numero)
+    //console.log(req.body.numero)
     if (req.body.carrinho.length == 0) {
         res.send(false)
     } else {
-        if (req.body.tipo == "cartao" && !verify()) {
+        if (req.body.tipo == "cartao" && !verify(req.body.numero, req.body.pin)) {
             res.send(false)
         } else {
             caixa["compras"].push({
@@ -51,9 +51,9 @@ function getFormattedDate() {
     return str;
 }
 
-function verify() {
-    var x = Math.random() * (100 - 0) + 0;
-    if (x < 10) {
+function verify(numero, pin) {
+    console.log(numero);
+    if (numero.length !== 16 || pin.length !== 3) {
         return false
     }
     return true;
