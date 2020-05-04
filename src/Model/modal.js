@@ -21,6 +21,12 @@ var methods = {
             "carrinho": carrinho
         })
         fs.writeFileSync('./src/Database/caixa.json', JSON.stringify(caixa));
+    },
+    verInicio: function (cod) {
+        if(cod === data.codigo){
+            return true
+        }
+        return false
     }
 };
 

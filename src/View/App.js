@@ -13,6 +13,7 @@ class App extends Component {
             valorTotal: 0,
             visible: false,
             card: false,
+            ver: false,
             off: 0,
             comprovante: [],
             total: 0,
@@ -20,12 +21,14 @@ class App extends Component {
             close: "",
             value: "",
             numero: "",
-            pin: ""
+            pin: "",
+            login: ""
         };
         this.onAdd = this.onAdd.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.handleNumero = this.handleNumero.bind(this)
         this.handlePin = this.handlePin.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
     }
 
     componentDidMount() {
@@ -61,11 +64,15 @@ class App extends Component {
                 "id": id
             })
         }).then(res => res.text()).then(res => {
-            products.push(
-                JSON.parse(res)
-            );
-            this.setState({products});
-            this.setState({valorTotal: valorTotal + JSON.parse(res).valor});
+            if (res === "") {
+                return;
+            } else {
+                products.push(
+                    JSON.parse(res)
+                );
+                this.setState({products});
+                this.setState({valorTotal: valorTotal + JSON.parse(res).valor});
+            }
         })
     }
 
@@ -92,7 +99,7 @@ class App extends Component {
                 "total": this.state.valorTotal,
                 "tipo": tipo,
                 "numero": this.state.numero,
-                "pin" : this.state.pin
+                "pin": this.state.pin
             })
         }).then(res => res.text()).then(res => {
             if (res === "true") {
@@ -135,6 +142,22 @@ class App extends Component {
         this.setState({total: this.formatMoney(t)})
     }
 
+    verInicio() {
+        fetch('http://localhost:5000/verInicio', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({cod: this.state.login})
+        }).then(res => res.text()).then(res => {
+            if (res === "true") {
+                this.inicia()
+            } else {
+                this.setState({ver: true})
+            }
+        })
+    }
+
     inicia() {
         this.setState({off: 1})
         this.clear()
@@ -147,11 +170,15 @@ class App extends Component {
     }
 
     handleNumero(event) {
-        this.setState({numero: event.target.value} )
+        this.setState({numero: event.target.value})
     }
 
     handlePin(event) {
-        this.setState({pin: event.target.value} )
+        this.setState({pin: event.target.value})
+    }
+
+    handleLogin(event) {
+        this.setState({login: event.target.value})
     }
 
     render() {
@@ -169,7 +196,8 @@ class App extends Component {
                     <li>Horario de abertura: {this.state.open}</li>
                     <li>Horario de encerramento: {this.state.close}</li>
                     <br/>
-                    <button className="button" onClick={() => this.setState({off: 0})}>Tela inicial</button>
+                    <button className="button" onClick={() => this.setState({off: 0, login: ""})}>Tela inicial
+                    </button>
                 </ul>
             )
         } else {
@@ -192,20 +220,21 @@ class App extends Component {
                                     onChange={this.handleNumero}
                                     placeholder="Número do Cartão"
                                     type='text'
-                                    value = {this.state.numero}
+                                    value={this.state.numero}
                                 />
                                 <input
                                     onChange={this.handlePin}
                                     placeholder="PIN de Segurança"
                                     type='text'
-                                    value = {this.state.pin}
+                                    value={this.state.pin}
                                 />
                                 <button className="button" onClick={() => this.pagar("cartao")}>Pagar</button>
                             </div>
                         </Modal>
 
                         <h1>Products Manager</h1>
-                        <button className="button" onClick={() => this.pagar("dinheiro")}>Pagar com dinheiro</button>
+                        <button className="button" onClick={() => this.pagar("dinheiro")}>Pagar com dinheiro
+                        </button>
                         <button className="button" onClick={() => this.pay()}>Pagar com cartao</button>
                         <button className="button" onClick={() => this.clear()}>Esvaziar carrinho</button>
                         <button className="button" onClick={() => {
@@ -239,7 +268,20 @@ class App extends Component {
                 return (
                     <div className="App">
                         <h1>Inicio</h1>
-                        <button className="button" onClick={() => this.inicia()}>Abrir caixa</button>
+                        <Modal visible={this.state.ver} width="450" height="175" effect="fadeInUp"
+                               onClickAway={() => this.setState({ver: false})}>
+                            <div>
+                                <h1>Codigo de acesso invalido</h1>
+                                <button className="button" onClick={() => this.setState({ver: false})}>Fechar</button>
+                            </div>
+                        </Modal>
+                        <input
+                            onChange={this.handleLogin}
+                            placeholder="Codigo de acesso"
+                            type='text'
+                            value={this.state.login}
+                        />
+                        <button className="button" onClick={() => this.verInicio()}>Abrir caixa</button>
                     </div>
                 )
             }

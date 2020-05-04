@@ -26,6 +26,10 @@ app.post('/pagar', function (req, res) {
     }
 });
 
+app.post('/verInicio', function (req, res) {
+    res.send(modal.data.verInicio(req.body.cod))
+});
+
 app.post('/close', function (req, res) {
     res.send(modal.data.close())
 });
