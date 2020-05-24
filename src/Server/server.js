@@ -38,7 +38,18 @@ function listAllAlunosInTimes() {
     });
 }
 
-
+function editTeam(){
+    db.serialize(() => {
+        db.each(`UPDATE Aluno
+            SET TimeId = 8
+            WHERE Nome = 'carlinho'`, (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    });
+}
+editTeam()
 listAllAlunosInTimes()
 
 
