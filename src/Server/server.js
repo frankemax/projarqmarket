@@ -1,63 +1,60 @@
 const express = require('express');
-const data = require("./src/database.json")
-const caixa = require("./src/caixa.json")
+const sqlite3 = require('sqlite3').verbose();
 var cors = require('cors');
 var bodyParser = require('body-parser')
 const fs = require('fs');
 const app = express();
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
-app.use(cors());
 
-app.post('/getProduto', function (req, res) {
-    res.send(
-        data[req.body.id]
-    )
-});
 
-app.post('/pagar', function (req, res) {
-    console.log(req.body.numero)
-    if (req.body.carrinho.length == 0) {
-        res.send(false)
-    } else {
-        if (req.body.tipo == "cartao" && !verify()) {
-            res.send(false)
-        } else {
-            caixa["compras"].push({
-                "tipo": req.body.tipo,
-                "total": req.body.total,
-                "carrinho": req.body.carrinho
-            })
-            fs.writeFileSync('./src/caixa.json', JSON.stringify(caixa));
-            res.send(true)
-        }
+// open the database
+let db = new sqlite3.Database('../Database/databaseTeams.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+        console.error(err.message);
     }
+    console.log('Connected to the database.');
 });
 
-app.post('/close', function (req, res) {
-    res.send(caixa)
-});
-
-app.post('/init', function (req, res) {
-    caixa["compras"] = []
-    fs.writeFileSync('./src/caixa.json', JSON.stringify(caixa));
-    res.send(getFormattedDate())
-});
-
-function getFormattedDate() {
-    var date = new Date();
-    var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-
-    return str;
+//printa os nomes de todos os alunos cadastrados
+function listAllAlunos(){
+    db.serialize(() => {
+        db.each(`SELECT * 
+    FROM Aluno`, (err, row) => {
+            if (err) {
+                console.error(err.message);
+            }
+            console.log(row.Nome + "\t"+ row.Matricula);
+        });
+    });
 }
 
-function verify() {
-    var x = Math.random() * (100 - 0) + 0;
-    if (x < 10) {
-        return false
-    }
-    return true;
+function listAllAlunosInTimes() {
+    db.serialize(() => {
+        db.each(`SELECT * FROM Aluno,TimesHacka WHERE Aluno.TimeId==TimesHacka.NumeroDoTime`, (err, row) => {
+            if (err) {
+                console.error(err.message);
+            }
+            console.log(row.Nome + "\t" + row.Matricula);
+        });
+    });
 }
+
+
+listAllAlunosInTimes()
+
+
+
+
+
+//fecha conexao do bd
+db.close((err) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.log('Close the database connection.');
+});
+
+
+
 
 const port = 5000;
 
