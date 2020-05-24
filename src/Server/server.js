@@ -52,6 +52,11 @@ function editTeam(){
 editTeam()
 listAllAlunosInTimes()
 
+app.post('/getAlunos', function (req, res) {
+    res.send(
+        '{"result":true, "count":42}'
+    )
+});
 
 
 

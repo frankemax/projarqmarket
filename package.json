@@ -22,7 +22,7 @@
     "sqlite3": "^4.2.0"
   },
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "nodemon ./src/Server/server.js",
     "client": "react-scripts start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
