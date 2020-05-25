@@ -34,7 +34,7 @@ class AlunoPage extends Component {
                 />
 
 
-                <Dropdown className="myDropdownMenu" onChange={this.onChange}  placeholder="Times..."/>
+                <Dropdown className="myDropdownMenuAlunoPage" onChange={this.onChange}  placeholder="Times..."/>
 
                 <button className="buttonAlunoPage1" onClick={this.onSubmit}>Confirmar</button>
                 <br/>
