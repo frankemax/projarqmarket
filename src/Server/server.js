@@ -6,7 +6,6 @@ app.use(cors());
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const fs = require('fs');
-const mongoose = require('mongoose')
 const times = require("../Database/times.json")
 const alunos = require("../Database/alunos.json")
 
@@ -21,6 +20,30 @@ app.post('/getTimes', function (req, res) {
     res.send(
         times
     )
+});
+
+app.post('/getTimeName', function (req, res) {
+    var aux = []
+    times.times.forEach(function (item) {
+        console.log(item.nomeTime)
+        aux.push(item.nomeTime)
+    });
+    console.log(aux)
+    res.send(JSON.stringify(aux))
+});
+
+app.post('/setTimes', function (req, res) {
+    var id = req.body.id
+    var time = req.body.time
+    var list = alunos.alunos
+    list.forEach(function (item, index) {
+        if(item.id === id){
+            item.time = time
+        }
+    });
+    alunos["alunos"] = list
+    fs.writeFileSync('./src/Database/alunos.json', JSON.stringify(alunos));
+    res.send(true)
 });
 
 app.post('/remove', function (req, res) {

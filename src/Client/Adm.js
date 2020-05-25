@@ -9,7 +9,8 @@ class Adm extends Component {
         this.state = {
             tela: 0,
             alunos: [],
-            teams: [],
+            times: [],
+            list: [],
             nomeNovoTime: ''
         };
 
@@ -66,7 +67,6 @@ class Adm extends Component {
             }
         }).then(res => res.text()).then(res => {
             this.setState({alunos: JSON.parse(res).alunos})
-            console.log(this.state.alunos)
         })
     }
 
@@ -78,7 +78,17 @@ class Adm extends Component {
             }
         }).then(res => res.text()).then(res => {
             this.setState({times: JSON.parse(res).times})
-            console.log(this.state.times)
+        })
+    }
+
+    getTimeName(){
+        fetch('http://localhost:5000/getTimeName', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => {
+            this.setState({list: JSON.parse(res)})
         })
     }
 
@@ -114,16 +124,22 @@ class Adm extends Component {
     componentDidMount() {
         this.getAlunos()
         this.getTimes()
+        this.getTimeName()
     }
 
     render() {
-        const {alunos} = this.state
+        const {alunos, times} = this.state
+        var list = []
+        times.forEach(function (item) {
+            list.push(item.nomeTime)
+        });
         if (this.state.tela === 0) {
             return (
                 alunos.map((aluno) => {
                     return (
                         <li key={`${aluno.id}`}>
                             <Aluno
+                                list={list}
                                 id={`${aluno.id}`}
                                 nome={aluno.nome}
                                 matricula={aluno.id}

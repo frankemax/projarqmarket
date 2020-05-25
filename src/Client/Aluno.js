@@ -21,12 +21,8 @@ class Aluno extends Component {
 
 
     render() {
-        const options = [
-            'one', 'two', 'three'
-        ]
-        const defaultOption = options[0];
-
-        const {nome, curso, time, matricula} = this.props;
+        const {nome, curso, time, matricula, list} = this.props;
+        console.log(list)
         return (
             <div>
                 <span>{nome}</span>
@@ -37,8 +33,8 @@ class Aluno extends Component {
                 {` | `}
                 <span>{time}</span>
 
-                <Dropdown className= 'myDropdown-menu' options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
-
+                <Dropdown className= 'myDropdown-menu' options={list} onChange={this._onSelect} value={"Sem time"} placeholder="Select an option" />
+                <span> <button className="buttonR" onClick={this.onDelete}>Confirmar</button></span>
                 <span> <button className="buttonR" onClick={this.onDelete}>Remover</button></span>
             </div>
 
