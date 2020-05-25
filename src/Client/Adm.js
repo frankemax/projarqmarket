@@ -92,7 +92,7 @@ class Adm extends Component {
     }
 
     createTime() {
-        console.log(this.state.nomeNovoTime)
+
         fetch('http://localhost:5000/createTime', {
             method: 'POST',
             headers: {
