@@ -5,6 +5,10 @@
 
 }
 
+.MuiTextField-root{
+ position: absolute;
+}
+
 .App2{
   text-align: center;
   list-style-type: square;

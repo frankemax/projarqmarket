@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Adm from './Adm';
 import Avaliador from "./Avaliador";
+import AlunoPage from "./AlunoPage";
 
 
 class App extends Component {
@@ -66,6 +67,7 @@ class App extends Component {
             return (
                 <ul className="App">
                     <br/>
+                    <AlunoPage/>
                 </ul>
             )
         }
