@@ -65,7 +65,7 @@ class App extends Component {
 
         if (this.state.telaAtual === 'Aluno') {
             return (
-                <ul className="App">
+                <ul>
                     <br/>
                     <AlunoPage/>
                 </ul>

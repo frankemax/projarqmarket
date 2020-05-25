@@ -20,16 +20,16 @@ class AlunoPage extends Component {
 
     render() {
         return (
-            <li>
-                <TextField id="outlined-basic" label="Digite a sua matrícula" />
+            <ui className="avaliador">
+                <TextField className="MuiTextField-root" id="outlined-basic" size="small"  label="Digite a sua matrícula"/>
 
-                <Dropdown className='myDropdown-menu'  size='small' onChange={this.onChange}
 
-                          placeholder="Select an option"/>
-                <span> <button className="sButton" onClick={this.onSubmit}>Confirmar</button></span>
+                <Dropdown className="myDropdownMenu" onChange={this.onChange}  placeholder="Times..."/>
+
+                <button className="buttonAlunoPage1" onClick={this.onSubmit}>Confirmar</button>
                 <br/>
-                <button className="submitButtonAvaliador" onClick={this.backMenu}>Voltar</button>
-            </li>
+                <button className="buttonAlunoPage2" onClick={this.backMenu}>Voltar</button>
+            </ui>
 
 
         );

@@ -92,7 +92,7 @@ class Avaliador extends Component {
         return (
             <ui className="avaliador">
                 <br/>
-                <Dropdown className="myDropdownMenu" options={this.state.list} onChange={this.onChangeItem}
+                <Dropdown className="myDropdownMenuAlunoPage" options={this.state.list} onChange={this.onChangeItem}
                           value={this.state.time === '' ? 'Times...' : this.state.time} placeholder="Select an option"/>
                 <br/>
                 <Score onChange={this.onChange} quesito={'Funcionalidade'}/>

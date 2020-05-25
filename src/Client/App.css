@@ -6,7 +6,12 @@
 }
 
 .MuiTextField-root{
- position: absolute;
+  position: absolute;
+  right: -825px;
+  top:+100px;
+
+
+
 }
 
 .App2{
@@ -22,9 +27,14 @@ ul {
   margin: auto;
 }
 
-myDropdownMenu{
+.myDropdownMenu{
   position: relative;
   right: 2000px;
+}
+
+.myDropdownMenuAlunoPage{
+  position: relative;
+  right: 20000px;
 }
 
 ul li {
@@ -64,8 +74,8 @@ ulli2 {
   margin: 4px 2px;
   cursor: pointer;
   top:-65px
-
 }
+
 .submitButtonAvaliador {
   background-color: #2e60e8;
   position: relative;
@@ -108,6 +118,40 @@ ulli2 {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+
+}
+
+.buttonAlunoPage1 {
+  background-color: #040e04;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: absolute;
+  right: 850px;
+  top:190px;
+}
+
+.buttonAlunoPage2 {
+  background-color: #396339;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: absolute;
+  right: 865px;
+  top:250px;
+
 
 }
 
