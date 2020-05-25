@@ -4,10 +4,10 @@ var cors = require('cors');
 var bodyParser = require('body-parser')
 const fs = require('fs');
 const app = express();
-
+app.use(cors());
 
 // open the database
-let db = new sqlite3.Database('../Database/databaseTeams.db', sqlite3.OPEN_READWRITE, (err) => {
+let db = new sqlite3.Database('./src/Database/databaseTeams.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
         console.error(err.message);
     }
@@ -17,14 +17,13 @@ let db = new sqlite3.Database('../Database/databaseTeams.db', sqlite3.OPEN_READW
 //printa os nomes de todos os alunos cadastrados
 
 function listAllAlunos(callback) {
-    var str=""
+    var str = ""
     db.serialize(() => {
             db.each(`SELECT * FROM Aluno`, (err, row) => {
                 if (err) {
                     console.error(err.message);
-                } else {
-                    callback(`"${row.Matricula}":{"Nome": ${row.Nome},"Curso": ${row.Curso},"TimeId": ${row.TimeId}},`)
                 }
+                return callback(`"${row.Matricula}":{"Nome": ${row.Nome},"Curso": ${row.Curso},"TimeId": ${row.TimeId}},`)
             });
         }
     );
@@ -54,19 +53,41 @@ function editTeam() {
 }
 
 
-function transform(name) {
-    console.log(name)
-}
+/*var stuff_i_want = '';
 
-listAllAlunos(transform);
+listAllAlunos(function (result) {
+    stuff_i_want += result;
+    test(stuff_i_want)
+})
+
+function test(data){
+    console.log(data)
+}*/
+
+var data = '';
+listAllAlunos(function (result) {
+    data += result;
+})
+
+function att(){
+    data = ''
+    listAllAlunos(function (result) {
+        data += result;
+    })
+}
 
 app.post('/getAlunos', function (req, res) {
     res.send(
-        '{"result":true, "count":42}'
+        '{"a":[{"nome":"lucas","id":42, "curso": "CC", "time": "nata"},{"nome":"schell","id":69, "curso": "ES", "time": "nata"}]}'
     )
 });
 
-
+/*app.get('/getAlunos', function (req, res) {
+    att()
+    res.send(
+        data
+    )
+});*/
 
 
 //fecha conexao do bd

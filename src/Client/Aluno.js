@@ -9,8 +9,8 @@ class Aluno extends Component {
     }
 
     onDelete() {
-        const {onDelete, id} = this.props;
-        onDelete(id);
+        const {onDelete, matricula} = this.props;
+        onDelete(matricula);
     }
 
     render() {
