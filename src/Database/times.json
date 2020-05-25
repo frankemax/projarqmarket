@@ -1,0 +1,20 @@
+{
+  "times":[
+    {
+      "nomeTime": "nata",
+      "nota": [5,2,3,4,5]
+    },
+    {
+      "nomeTime": "Time7",
+      "nota": [5,2,3,4,5]
+    },
+    {
+      "nomeTime": "naruto",
+      "nota": [5,2,3,4,5]
+    },
+    {
+      "nomeTime": "sharingan",
+      "nota": [5,2,3,4,5]
+    }
+    ]
+}

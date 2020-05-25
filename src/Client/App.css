@@ -2,7 +2,7 @@
   list-style-type: square;
   padding: 0;
   margin: 0;
-  text-align: center;
+
 }
 
 ul {
@@ -16,6 +16,7 @@ ul li {
   margin-top: -1px; /* Prevent double borders */
   background-color: #f6f6f6;
   padding: 30px;
+  height: 25px;
   width: 1500px;
   display: block;
   margin-left: auto;
@@ -33,11 +34,12 @@ ul li {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+
 }
 
 .buttonR {
   background-color: #e04343;
-  left:550px;
+  left:1400px;
   position:relative;
   border: none;
   color: white;
@@ -48,22 +50,9 @@ ul li {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  top:-65px
 }
 
-.Dropdown-menu {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
-  margin-top: -1px;
-  max-height: 200px;
-  overflow-y: auto;
-  position: absolute;
-  top: 25%;
-  width: 25%;
-  z-index: 1000;
-  -webkit-overflow-scrolling: touch;
-}
 
 input[type=text], select {
   width: 350px;

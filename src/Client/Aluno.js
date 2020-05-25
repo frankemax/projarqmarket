@@ -39,7 +39,7 @@ class Aluno extends Component {
                 {` | `}
                 <span>{time}</span>
 
-                <span> <Dropdown className= 'myDropdown-menu' options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /></span>
+                <Dropdown className= 'myDropdown-menu' options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
 
                 <span> <button className="buttonR" onClick={this.onDelete}>Remover</button></span>
             </div>
