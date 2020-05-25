@@ -1,121 +1,82 @@
+const express = require('express');
+const sqlite3 = require('sqlite3').verbose();
+var cors = require('cors');
+app.use(cors());
+var bodyParser = require('body-parser')
+const fs = require('fs');
+const app = express();
 const mongoose = require('mongoose')
 
 
-const express = require('express');
-const app = express();
-var cors = require('cors');
-app.use(cors());
-
-// Configuracao inicial do Mongoose
-
-mongoose.connect('mongodb://localhost/database', {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-});
-mongoose.connection.on('error', err => {
-    throw 'failed connect to MongoDB';
-
+// open the database
+let db = new sqlite3.Database('./src/Database/databaseTeams.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.log('Connected to the database.');
 });
 
+//printa os nomes de todos os alunos cadastrados
 
-// define a tabela usuario
-const Aluno = mongoose.model('User', {
-
-    nome: {
-        type: String,
-    },
-
-    id: {
-        type: Number,
-    },
-
-    curso: {
-        type: String,
-    },
-
-    time: {
-        type: String,
-    }
-
-})
-
-
-// define a tabela time
-const Time = mongoose.model("Time", {
-
-    nome: {
-        type: String,
-    },
-    nota1: {
-        type: Number,
-    },
-    nota2: {
-        type: Number,
-    },
-    nota3: {
-        type: Number,
-    },
-    nota4: {
-        type: Number,
-    },
-    nota5: {
-        type: Number,
-    }
-})
-
-
-// modelo de criacao de aluno
-const carlosTime = new Time({
-
-    nome: 'Caralho',
-    nota1: 4,
-    nota2: 3,
-    nota3: 1,
-    nota4: 5,
-    nota5: 5
-
-})
-
-console.log("CARLAO POR FAVOR")
-
-carlosTime.save().then(() => {
-    console.log(carlosTime)
-}).catch((err) => {
-    console.log("Socorro, merdei" + err)
-})
-
-console.log("CARLAO POR FAVOR")
-
-
-async function atualizaTime(alunoId, time) {
-
-    const filter = {id: alunoId};
-    const update = {time: time};
-
-    let doc = await Aluno.findOneAndUpdate(filter, update)
-
+function listAllAlunos(callback) {
+    var str = ""
+    db.serialize(() => {
+            db.each(`SELECT * FROM Aluno`, (err, row) => {
+                if (err) {
+                    console.error(err.message);
+                }
+                return callback(`"${row.Matricula}":{"Nome": ${row.Nome},"Curso": ${row.Curso},"TimeId": ${row.TimeId}},`)
+            });
+        }
+    );
 }
 
-async function removeAluno(id) {
-
-    await Aluno.findOneAndDelete(id)
-
-}
-
-app.get('/meme', async (req, res) => {
-
-    const users = await Aluno.find({});
-
-    const userMap = {};
-    users.forEach((user) => {
-        userMap[user._id] = user;
-        console.log(user)
+function listAllAlunosInTimes() {
+    db.serialize(() => {
+        db.each(`SELECT * FROM Aluno,TimesHacka WHERE Aluno.TimeId==TimesHacka.NumeroDoTime`, (err, row) => {
+            if (err) {
+                console.error(err.message);
+            }
+            console.log(row.Nome + "\t" + row.Matricula);
+        });
     });
+}
 
-    res.send(userMap);
+function editTeam() {
+    db.serialize(() => {
+        db.each(`UPDATE Aluno
+            SET TimeId = 8
+            WHERE Nome = 'carlinho'`, (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    });
+}
 
-});
+
+/*var stuff_i_want = '';
+
+listAllAlunos(function (result) {
+    stuff_i_want += result;
+    test(stuff_i_want)
+})
+
+function test(data){
+    console.log(data)
+}*/
+
+var data = '';
+listAllAlunos(function (result) {
+    data += result;
+})
+
+function att(){
+    data = ''
+    listAllAlunos(function (result) {
+        data += result;
+    })
+}
 
 app.post('/getAlunos', function (req, res) {
     res.send(
@@ -123,14 +84,22 @@ app.post('/getAlunos', function (req, res) {
     )
 });
 
-async function retornaAlunos() {
+/*app.get('/getAlunos', function (req, res) {
+    att()
+    res.send(
+        data
+    )
+});*/
 
-    Aluno.find().lean().exec(function (err, users) {
-        return res.end(JSON.stringify(users));
-    })
 
+//fecha conexao do bd
+db.close((err) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.log('Close the database connection.');
+});
 
-}
 
 const port = 5000;
 
