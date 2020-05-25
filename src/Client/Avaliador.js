@@ -24,7 +24,7 @@ class Avaliador extends Component {
         this.backMenu = this.backMenu.bind(this)
     }
 
-    backMenu(){
+    backMenu() {
         const {setAtualState} = this.props
         setAtualState()
     }
