@@ -10,8 +10,8 @@
     right: -900px;
 }
 .myDropdownMenuAlunoPage{
-    position: center;
-    right: -900px;
+    position: absolute;
+    right: 820px;
     top: 50px;
 }
 

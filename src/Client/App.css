@@ -28,8 +28,8 @@ ul {
 }
 
 .myDropdownMenu{
-  position: relative;
-  right: 2000px;
+  position: absolute;
+  right: 200px;
 }
 
 .myDropdownMenuAlunoPage{

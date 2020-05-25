@@ -25,10 +25,8 @@ app.post('/getTimes', function (req, res) {
 app.post('/getTimeName', function (req, res) {
     var aux = []
     times.times.forEach(function (item) {
-        console.log(item.nomeTime)
         aux.push(item.nomeTime)
     });
-    console.log(aux)
     res.send(JSON.stringify(aux))
 });
 
@@ -39,6 +37,20 @@ app.post('/setTimes', function (req, res) {
     list.forEach(function (item, index) {
         if(item.id === id){
             item.time = time
+        }
+    });
+    alunos["alunos"] = list
+    fs.writeFileSync('./src/Database/alunos.json', JSON.stringify(alunos));
+    res.send(true)
+});
+
+app.post('/setOpcao', function (req, res) {
+    var id = req.body.id
+    var time = req.body.opcao
+    var list = alunos.alunos
+    list.forEach(function (item) {
+        if(item.id == id){
+            item.opcao = time
         }
     });
     alunos["alunos"] = list

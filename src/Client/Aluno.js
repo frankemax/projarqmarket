@@ -32,7 +32,7 @@ class Aluno extends Component {
     }
 
     render() {
-        const {nome, curso, time, matricula, list} = this.props;
+        const {nome, curso, time, matricula, list, opcao} = this.props;
         return (
             <div>
                 <span>{nome}</span>
@@ -40,6 +40,8 @@ class Aluno extends Component {
                 <span>{matricula}</span>
                 {` | `}
                 <span>{curso}</span>
+                {` | `}
+                <span>{opcao}</span>
 
                 <Dropdown className='myDropdown-menu' options={list} onChange={this.onChange}
                           value={time !== '' ? time : this.state.time}

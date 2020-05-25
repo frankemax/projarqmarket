@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import TextField from '@material-ui/core/TextField';
-import Aluno from "./Aluno";
 import Dropdown from "react-dropdown";
 
 class AlunoPage extends Component {
@@ -14,10 +12,13 @@ class AlunoPage extends Component {
             times: [],
             list: [],
             nomeNovoTime: '',
-            id: ''
+            id: '',
+            time: ''
         };
         this.backMenu = this.backMenu.bind(this)
         this.handleId = this.handleId.bind(this)
+        this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     backMenu() {
@@ -40,20 +41,39 @@ class AlunoPage extends Component {
         })
     }
 
+    onChange(event) {
+        this.setState({time: event.value})
+    }
+
     componentDidMount() {
         this.getTimeName()
+    }
+
+    onSubmit(){
+        fetch('http://localhost:5000/setOpcao', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'id': this.state.id,
+                'opcao': this.state.time
+            })
+        }).then(res => res.text()).then(res => {
+            console.log(res)
+        })
     }
 
     render() {
         return (
             <ul className="avaliador">
-                <input className="inputLabel"
+                <input className="inputLabel2"
                        onChange={this.handleId}
                        placeholder="Matricula"
                        type='text'
                        value={this.state.id}
                 />
-                <Dropdown className='myDropdown-menu' options={this.state.list} onChange={this.onChange}
+                <Dropdown className='myDropdownMenuAlunoPage' options={this.state.list} onChange={this.onChange}
                           value={this.state.time}
                           placeholder="Sem time"/>
 
@@ -61,8 +81,6 @@ class AlunoPage extends Component {
                 <br/>
                 <button className="buttonAlunoPage2" onClick={this.backMenu}>Voltar</button>
             </ul>
-
-
         );
     }
 

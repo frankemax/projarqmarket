@@ -173,6 +173,7 @@ class Adm extends Component {
                                     matricula={aluno.id}
                                     curso={aluno.curso}
                                     time={aluno.time}
+                                    opcao={aluno.opcao}
                                     onSubmit={this.onSubmit}
                                     onDelete={this.onDelete}
                                 />
