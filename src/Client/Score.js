@@ -6,33 +6,22 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import './App.css';
 
-import Dropdown from 'react-dropdown';
-
 
 class Score extends Component {
 
     constructor(props) {
         super(props);
 
-
-    }
-
-    onSubmit(){
-
+        console.log(this.props)
+        this.onChange = this.onChange.bind(this)
     }
 
     onChange(event){
         const {onChange} = this.props
         onChange(this.props.quesito, event.target.value)
-
     }
-
-
-
-
     render() {
         return (
-
             <li>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">{this.props.quesito}</FormLabel>
@@ -69,7 +58,5 @@ class Score extends Component {
             </li>
         );
     }
-//<button className= "submitButton" onClick={this.onSubmit}>Submit</button>
 }
-//<button className= "submitButton" onClick={this.onSubmit}>Submit</button>
 export default Score;

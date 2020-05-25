@@ -22,14 +22,6 @@ class Adm extends Component {
         this.createTime = this.createTime.bind(this);
     }
 
-    onSubmit(event) {
-        event.preventDefault();
-
-        //this.props.onAdd(this.nameInput.value);
-
-        this.nameInput.value = '';
-    }
-
     remove(arr, attr, value) {
         let i = arr.length;
         while (i--) {

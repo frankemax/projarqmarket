@@ -10,37 +10,58 @@ class Avaliador extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list:[],
+            time: '',
+            list: [],
             funcionalidade: 0,
-            processo : 0,
+            processo: 0,
             pitch: 0,
             inovacao: 0,
             formacaodotime: 0
         };
         this.onChange = this.onChange.bind(this)
-
+        this.onSubmit = this.onSubmit.bind(this)
+        this.onChangeItem = this.onChangeItem.bind(this)
     }
 
-    onChange(event){
+    onChange(quesito, value) {
 
-        if(quesito === 'funcionalidade'){
+        if (quesito === 'Funcionalidade') {
             this.setState({funcionalidade: value})
         }
-        if(quesito === 'processo'){
+        if (quesito === 'Processo') {
             this.setState({processo: value})
         }
-        if(quesito === 'pitch'){
+        if (quesito === 'Pitch') {
             this.setState({pitch: value})
         }
-        if(quesito === 'inovacao'){
+        if (quesito === 'Inovacao') {
             this.setState({inovacao: value})
         }
-        if(quesito === 'formacaodotime'){
+        if (quesito === 'Formacaodotime') {
             this.setState({formacaodotime: value})
         }
     }
 
-    getTimeName(){
+    onSubmit() {
+        fetch('http://localhost:5000/setScore', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'funcionalidade': this.state.funcionalidade,
+                'processo': this.state.processo,
+                'pitch': this.state.pitch,
+                'inovacao': this.state.inovacao,
+                'formacaodotime': this.state.formacaodotime,
+                'time': this.state.time
+            })
+        }).then(res => res.text()).then(res => {
+            console.log(res)
+        })
+    }
+
+    getTimeName() {
         fetch('http://localhost:5000/getTimeName', {
             method: 'POST',
             headers: {
@@ -51,27 +72,28 @@ class Avaliador extends Component {
         })
     }
 
+    onChangeItem(event) {
+        this.setState({time: event.value})
+    }
+
     componentDidMount() {
         this.getTimeName()
     }
 
 
     render() {
-
-        const {funcionalidade, processo, pitch, inovacao, formacaodotime} = this.props
-
-
         return (
             <ui className="avaliador">
                 <br/>
-                <Dropdown className= "myDropdownMenu" options={this.state.list} onChange={this._onSelect} value={"Times..."} placeholder="Select an option" />
+                <Dropdown className="myDropdownMenu" options={this.state.list} onChange={this.onChangeItem}
+                          value={"Times..."} placeholder="Select an option"/>
                 <br/>
-                <Score onChange ={this.onChange} quesito={'Funcionalidade'}/>
-                <Score onChange ={this.onChange} quesito={'Processo'}/>
-                <Score onChange ={this.onChange} quesito={'Pitch'}/>
-                <Score onChange ={this.onChange} quesito={'Inovação'}/>
-                <Score onChange ={this.onChange} quesito={'Formação do time'}/>
-                <button className= "submitButton" onClick={this.onSubmit}>Submit</button>
+                <Score onChange={this.onChange} quesito={'Funcionalidade'}/>
+                <Score onChange={this.onChange} quesito={'Processo'}/>
+                <Score onChange={this.onChange} quesito={'Pitch'}/>
+                <Score onChange={this.onChange} quesito={'Inovação'}/>
+                <Score onChange={this.onChange} quesito={'Formação do time'}/>
+                <button className="submitButtonAvaliador" onClick={this.onSubmit}>Submit</button>
             </ui>
         );
     }
