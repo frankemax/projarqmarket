@@ -9,11 +9,15 @@ class Adm extends Component {
         this.state = {
             tela: 0,
             alunos: [],
-            teams: []
+            teams: [],
+            nomeNovoTime: ''
         };
+
         this.onSubmit = this.onSubmit.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.getAlunos = this.getAlunos.bind(this);
+        this.getTimes = this.getTimes.bind(this);
+        this.setTime = this.setTime.bind(this);
     }
 
     onSubmit(event) {
@@ -47,15 +51,13 @@ class Adm extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: {'id': id}
+            body: JSON.stringify({'id': id})
         }).then(res => res.text()).then(res => {
             console.log(res)
         })
     }
 
     getAlunos() {
-        console.log("teste")
-
         fetch('http://localhost:5000/getAlunos', {
             method: 'POST',
             headers: {
@@ -67,8 +69,50 @@ class Adm extends Component {
         })
     }
 
+    getTimes() {
+        fetch('http://localhost:5000/getTimes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => {
+            this.setState({times: JSON.parse(res).a})
+            console.log(this.state.times)
+        })
+    }
+
+    setTime(id, nomeTime){
+        fetch('http://localhost:5000/setTimes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'id': id,
+                'time': nomeTime
+            })
+        }).then(res => res.text()).then(res => {
+            console.log(res)
+        })
+    }
+
+    createTime(){
+        fetch('http://localhost:5000/createTime', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'nome': this.state.nomeNovoTime
+            })
+        }).then(res => res.text()).then(res => {
+            console.log(res)
+        })
+    }
+
     componentDidMount() {
         this.getAlunos()
+        this.getTimes()
     }
 
     render() {
