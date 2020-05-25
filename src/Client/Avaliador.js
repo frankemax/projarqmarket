@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Score from './Score';
 import './dropdown.css';
+
 import Dropdown from 'react-dropdown';
 
 
@@ -20,9 +21,7 @@ class Avaliador extends Component {
 
     }
 
-    onChange(quesito,value){
-        console.log(quesito)
-        console.log(value)
+    onChange(event){
 
         if(quesito === 'funcionalidade'){
             this.setState({funcionalidade: value})

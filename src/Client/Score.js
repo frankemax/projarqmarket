@@ -71,5 +71,5 @@ class Score extends Component {
     }
 //<button className= "submitButton" onClick={this.onSubmit}>Submit</button>
 }
-
+//<button className= "submitButton" onClick={this.onSubmit}>Submit</button>
 export default Score;
