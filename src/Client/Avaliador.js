@@ -24,7 +24,7 @@ class Avaliador extends Component {
         this.backMenu = this.backMenu.bind(this)
     }
 
-    backMenu(){
+    backMenu() {
         const {setAtualState} = this.props
         setAtualState()
     }
@@ -94,7 +94,7 @@ class Avaliador extends Component {
                 <br/>
                 <Dropdown className="myDropdownMenuAlunoPage" options={this.state.list} onChange={this.onChangeItem}
                           value={this.state.time === '' ? 'Times...' : this.state.time} placeholder="Select an option"/>
-                <br/>
+                <br/> <br/>
                 <Score onChange={this.onChange} quesito={'Funcionalidade'}/>
                 <Score onChange={this.onChange} quesito={'Processo'}/>
                 <Score onChange={this.onChange} quesito={'Pitch'}/>

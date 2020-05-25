@@ -107,6 +107,7 @@ class Adm extends Component {
             }).then(res => res.text()).then(res => {
                 this.getTimes()
                 this.getTimeName()
+                this.setState({nomeNovoTime: ''})
             })
         }
     }

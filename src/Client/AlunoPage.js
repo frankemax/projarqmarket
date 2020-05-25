@@ -50,6 +50,8 @@ class AlunoPage extends Component {
     }
 
     onSubmit(){
+
+
         fetch('http://localhost:5000/setOpcao', {
             method: 'POST',
             headers: {
@@ -61,6 +63,8 @@ class AlunoPage extends Component {
             })
         }).then(res => res.text()).then(res => {
             console.log(res)
+            window.alert("Sucesso!");
+            this.setState({id:''})
         })
     }
 
@@ -80,6 +84,7 @@ class AlunoPage extends Component {
                 <button className="buttonAlunoPage1" onClick={this.onSubmit}>Confirmar</button>
                 <br/>
                 <button className="buttonAlunoPage2" onClick={this.backMenu}>Voltar</button>
+
             </ul>
         );
     }
