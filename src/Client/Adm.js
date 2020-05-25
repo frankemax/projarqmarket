@@ -152,13 +152,13 @@ class Adm extends Component {
         if (this.state.tela === 0) {
             return (
                 <ul>
-                    <input
+                    <input className="inputLabel"
                         onChange={this.handleNome}
-                        placeholder="Nome do grupo"
+                        placeholder="Nome do time"
                         type='text'
                         value={this.state.nomeNovoTime}
                     />
-                    <button className="button" onClick={this.createTime}>Criar</button>
+                    <button className="buttonCriaTime" onClick={this.createTime}>Criar</button>
                     {alunos.map((aluno) => {
                     return (
                         <li key={`${aluno.id}`}>

@@ -15,7 +15,6 @@ class AlunoPage extends Component {
             list: [],
             nomeNovoTime: ''
         };
-
     }
 
     render() {

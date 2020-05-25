@@ -57,6 +57,7 @@ class App extends Component {
             return (
                 <ul className="avaliador">
                     <br/>
+                    <br/>
                     <Avaliador setAtualState={this.setAtualState}/>
                 </ul>
             )
