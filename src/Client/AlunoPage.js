@@ -13,9 +13,11 @@ class AlunoPage extends Component {
             alunos: [],
             times: [],
             list: [],
-            nomeNovoTime: ''
+            nomeNovoTime: '',
+            id: ''
         };
         this.backMenu = this.backMenu.bind(this)
+        this.handleId = this.handleId.bind(this)
     }
 
     backMenu() {
@@ -23,23 +25,42 @@ class AlunoPage extends Component {
         setAtualState()
     }
 
+    handleId(event){
+        this.setState({id: event.target.value})
+    }
+
+    getTimeName() {
+        fetch('http://localhost:5000/getTimeName', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => {
+            this.setState({list: JSON.parse(res)})
+        })
+    }
+
+    componentDidMount() {
+        this.getTimeName()
+    }
+
     render() {
         return (
-            <ui className="avaliador">
+            <ul className="avaliador">
                 <input className="inputLabel"
-                       onChange={this.handleNome}
-                       placeholder="Nome do time"
+                       onChange={this.handleId}
+                       placeholder="Matricula"
                        type='text'
-                       value={this.state.nomeNovoTime}
+                       value={this.state.id}
                 />
-
-
-                <Dropdown className="myDropdownMenuAlunoPage" onChange={this.onChange}  placeholder="Times..."/>
+                <Dropdown className='myDropdown-menu' options={this.state.list} onChange={this.onChange}
+                          value={this.state.time}
+                          placeholder="Sem time"/>
 
                 <button className="buttonAlunoPage1" onClick={this.onSubmit}>Confirmar</button>
                 <br/>
                 <button className="buttonAlunoPage2" onClick={this.backMenu}>Voltar</button>
-            </ui>
+            </ul>
 
 
         );
