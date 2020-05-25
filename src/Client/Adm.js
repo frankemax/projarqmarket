@@ -153,28 +153,30 @@ class Adm extends Component {
             return (
                 <ul>
                     <input className="inputLabel"
-                        onChange={this.handleNome}
-                        placeholder="Nome do time"
-                        type='text'
-                        value={this.state.nomeNovoTime}
+                           onChange={this.handleNome}
+                           placeholder="Nome do time"
+                           type='text'
+                           value={this.state.nomeNovoTime}
                     />
                     <button className="buttonCriaTime" onClick={this.createTime}>Criar</button>
                     {alunos.map((aluno) => {
-                    return (
-                        <li key={`${aluno.id}`}>
-                            <Aluno
-                                list={list}
-                                id={`${aluno.id}`}
-                                nome={aluno.nome}
-                                matricula={aluno.id}
-                                curso={aluno.curso}
-                                time={aluno.time}
-                                onSubmit={this.onSubmit}
-                                onDelete={this.onDelete}
-                            />
-                        </li>
-                    )
-                })}
+                        return (
+                            <li key={`${aluno.id}`}>
+                                <Aluno
+                                    list={list}
+                                    id={`${aluno.id}`}
+                                    nome={aluno.nome}
+                                    matricula={aluno.id}
+                                    curso={aluno.curso}
+                                    time={aluno.time}
+                                    onSubmit={this.onSubmit}
+                                    onDelete={this.onDelete}
+                                />
+                            </li>
+                        )
+                    })}
+                    <br/>
+                    <button className="submitButtonAvaliador" onClick={this.backMenu}>Voltar</button>
                 </ul>
             );
         }

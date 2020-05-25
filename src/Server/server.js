@@ -65,6 +65,11 @@ app.post('/setScore', function (req, res) {
 });
 
 app.post('/createTime', function (req, res) {
+    times.times.forEach(function (item) {
+        if(item.nomeTime === req.body.nome){
+            res.send(false)
+        }
+    })
     times["times"].push({
         nomeTime: req.body.nome,
         nota: []
