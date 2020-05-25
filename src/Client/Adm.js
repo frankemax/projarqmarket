@@ -87,12 +87,14 @@ class Adm extends Component {
                 'time': nomeTime
             })
         }).then(res => res.text()).then(res => {
-            console.log(res)
+            this.getAlunos()
+            this.getTimes()
         })
     }
 
     createTime() {
         if (this.state.list.includes(this.state.nomeNovoTime)) {
+            window.alert('Nome do time ja existe')
             console.log(false)
             return
         } else {
