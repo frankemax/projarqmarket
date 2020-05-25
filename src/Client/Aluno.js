@@ -8,21 +8,31 @@ class Aluno extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            time: ''
+        };
+
         this.onDelete = this.onDelete.bind(this);
+        this.onSubmit = this.onSubmit.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
-
-
 
     onDelete() {
         const {onDelete, matricula} = this.props;
         onDelete(matricula);
     }
 
+    onSubmit() {
+        const {onSubmit, matricula} = this.props;
+        onSubmit(matricula, this.state.time);
+    }
 
+    onChange(event) {
+        this.setState({time: event.value})
+    }
 
     render() {
         const {nome, curso, time, matricula, list} = this.props;
-        console.log(list)
         return (
             <div>
                 <span>{nome}</span>
@@ -30,11 +40,11 @@ class Aluno extends Component {
                 <span>{matricula}</span>
                 {` | `}
                 <span>{curso}</span>
-                {` | `}
-                <span>{time}</span>
 
-                <Dropdown className= 'myDropdown-menu' options={list} onChange={this._onSelect} value={"Sem time"} placeholder="Select an option" />
-                <span> <button className="buttonR" onClick={this.onDelete}>Confirmar</button></span>
+                <Dropdown className='myDropdown-menu' options={list} onChange={this.onChange}
+                          value={time !== '' ? time : this.state.time}
+                          placeholder="Select an option"/>
+                <span> <button className="sButton" onClick={this.onSubmit}>Confirmar</button></span>
                 <span> <button className="buttonR" onClick={this.onDelete}>Remover</button></span>
             </div>
 

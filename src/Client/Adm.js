@@ -44,21 +44,6 @@ class Adm extends Component {
         return arr;
     }
 
-    onDelete(id) {
-        const {alunos} = this.state
-        this.remove(alunos, 'id', id);
-        this.setState({alunos: alunos});
-        fetch('http://localhost:5000/remove', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({'id': id})
-        }).then(res => res.text()).then(res => {
-            console.log(res)
-        })
-    }
-
     getAlunos() {
         fetch('http://localhost:5000/getAlunos', {
             method: 'POST',
@@ -81,7 +66,7 @@ class Adm extends Component {
         })
     }
 
-    getTimeName(){
+    getTimeName() {
         fetch('http://localhost:5000/getTimeName', {
             method: 'POST',
             headers: {
@@ -92,7 +77,7 @@ class Adm extends Component {
         })
     }
 
-    setTime(id, nomeTime){
+    setTime(id, nomeTime) {
         fetch('http://localhost:5000/setTimes', {
             method: 'POST',
             headers: {
@@ -107,7 +92,7 @@ class Adm extends Component {
         })
     }
 
-    createTime(){
+    createTime() {
         fetch('http://localhost:5000/createTime', {
             method: 'POST',
             headers: {
@@ -127,12 +112,38 @@ class Adm extends Component {
         this.getTimeName()
     }
 
+    onDelete(id) {
+        const {alunos} = this.state
+        this.remove(alunos, 'id', id);
+        this.setState({alunos: alunos});
+        fetch('http://localhost:5000/remove', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'id': id})
+        }).then(res => res.text()).then(res => {
+            console.log(res)
+        })
+    }
+
+    onSubmit(id,time) {
+        fetch('http://localhost:5000/setTimes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'id': id,
+                'time': time
+            })
+        }).then(res => res.text()).then(res => {
+            console.log(res)
+        })
+    }
+
     render() {
-        const {alunos, times} = this.state
-        var list = []
-        times.forEach(function (item) {
-            list.push(item.nomeTime)
-        });
+        const {alunos, list} = this.state
         if (this.state.tela === 0) {
             return (
                 alunos.map((aluno) => {
@@ -145,6 +156,7 @@ class Adm extends Component {
                                 matricula={aluno.id}
                                 curso={aluno.curso}
                                 time={aluno.time}
+                                onSubmit={this.onSubmit}
                                 onDelete={this.onDelete}
                             />
                         </li>
