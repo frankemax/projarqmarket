@@ -15,16 +15,19 @@ let db = new sqlite3.Database('../Database/databaseTeams.db', sqlite3.OPEN_READW
 });
 
 //printa os nomes de todos os alunos cadastrados
-function listAllAlunos(){
+
+function listAllAlunos(callback) {
+    var str=""
     db.serialize(() => {
-        db.each(`SELECT * 
-    FROM Aluno`, (err, row) => {
-            if (err) {
-                console.error(err.message);
-            }
-            console.log(row.Nome + "\t"+ row.Matricula);
-        });
-    });
+            db.each(`SELECT * FROM Aluno`, (err, row) => {
+                if (err) {
+                    console.error(err.message);
+                } else {
+                    callback(`"${row.Matricula}":{"Nome": ${row.Nome},"Curso": ${row.Curso},"TimeId": ${row.TimeId}},`)
+                }
+            });
+        }
+    );
 }
 
 function listAllAlunosInTimes() {
@@ -38,7 +41,7 @@ function listAllAlunosInTimes() {
     });
 }
 
-function editTeam(){
+function editTeam() {
     db.serialize(() => {
         db.each(`UPDATE Aluno
             SET TimeId = 8
@@ -49,8 +52,13 @@ function editTeam(){
         });
     });
 }
-editTeam()
-listAllAlunosInTimes()
+
+
+function transform(name) {
+    console.log(name)
+}
+
+listAllAlunos(transform);
 
 app.post('/getAlunos', function (req, res) {
     res.send(
@@ -68,8 +76,6 @@ db.close((err) => {
     }
     console.log('Close the database connection.');
 });
-
-
 
 
 const port = 5000;
