@@ -92,19 +92,23 @@ class Adm extends Component {
     }
 
     createTime() {
-
-        fetch('http://localhost:5000/createTime', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'nome': this.state.nomeNovoTime
+        if (this.state.list.includes(this.state.nomeNovoTime)) {
+            console.log(false)
+            return
+        } else {
+            fetch('http://localhost:5000/createTime', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'nome': this.state.nomeNovoTime
+                })
+            }).then(res => res.text()).then(res => {
+                this.getTimes()
+                this.getTimeName()
             })
-        }).then(res => res.text()).then(res => {
-            this.getTimes()
-            this.getTimeName()
-        })
+        }
     }
 
     componentDidMount() {
