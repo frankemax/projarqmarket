@@ -6,6 +6,8 @@ const fs = require('fs');
 const app = express();
 app.use(cors());
 
+
+
 // open the database
 let db = new sqlite3.Database('./src/Database/databaseTeams.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
