@@ -22,7 +22,9 @@ class Score extends Component {
     }
 
     onChange(event){
-        console.log(event.target.value)
+        const {onChange} = this.props
+        onChange(this.props.quesito, event.target.value)
+
     }
 
 
@@ -60,14 +62,14 @@ class Score extends Component {
                             labelPlacement="1"
                         />
                         <FormControlLabel value="5" control={<Radio color="primary"/>} label="5"/>
-                        <button className= "submitButton" onClick={this.onSubmit}>Submit</button>
+
                     </RadioGroup>
                 </FormControl>
 
             </li>
         );
     }
-
+//<button className= "submitButton" onClick={this.onSubmit}>Submit</button>
 }
 
 export default Score;

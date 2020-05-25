@@ -16,7 +16,7 @@ class App extends Component {
 
 
     render() {
-        if (this.state.telaAtual == 'main') {
+        if (this.state.telaAtual === 'main') {
             return (
                 <ul className="App">
                     <br/>
@@ -25,7 +25,7 @@ class App extends Component {
                 </ul>
             )
         }
-        if (this.state.telaAtual == 'adm') {
+        if (this.state.telaAtual === 'adm') {
             return (
                 <ul className="App">
                     <br/>
@@ -34,7 +34,7 @@ class App extends Component {
             )
         }
 
-        if (this.state.telaAtual == 'avali') {
+        if (this.state.telaAtual === 'avali') {
             return (
                 <ul className="avaliador">
                     <br/>
@@ -46,7 +46,7 @@ class App extends Component {
             )
         }
 
-        if (this.state.telaAtual == 'aluno') {
+        if (this.state.telaAtual === 'aluno') {
             return (
                 <ul className="App">
                     <br/>
