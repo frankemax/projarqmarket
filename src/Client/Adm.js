@@ -21,6 +21,7 @@ class Adm extends Component {
         this.setTime = this.setTime.bind(this);
         this.createTime = this.createTime.bind(this);
         this.backMenu = this.backMenu.bind(this)
+        this.handleNome = this.handleNome.bind(this)
     }
 
     backMenu() {
@@ -91,6 +92,7 @@ class Adm extends Component {
     }
 
     createTime() {
+        console.log(this.state.nomeNovoTime)
         fetch('http://localhost:5000/createTime', {
             method: 'POST',
             headers: {
@@ -100,7 +102,8 @@ class Adm extends Component {
                 'nome': this.state.nomeNovoTime
             })
         }).then(res => res.text()).then(res => {
-            console.log(res)
+            this.getTimes()
+            this.getTimeName()
         })
     }
 
@@ -140,11 +143,23 @@ class Adm extends Component {
         })
     }
 
+    handleNome(event) {
+        this.setState({nomeNovoTime: event.target.value})
+    }
+
     render() {
         const {alunos, list} = this.state
         if (this.state.tela === 0) {
             return (
-                alunos.map((aluno) => {
+                <ul>
+                    <input
+                        onChange={this.handleNome}
+                        placeholder="Nome do grupo"
+                        type='text'
+                        value={this.state.nomeNovoTime}
+                    />
+                    <button className="button" onClick={this.createTime}>Criar</button>
+                    {alunos.map((aluno) => {
                     return (
                         <li key={`${aluno.id}`}>
                             <Aluno
@@ -159,7 +174,8 @@ class Adm extends Component {
                             />
                         </li>
                     )
-                })
+                })}
+                </ul>
             );
         }
     }

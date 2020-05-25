@@ -48,7 +48,6 @@ class App extends Component {
                     <br/>
                     <Adm setAtualState={this.setAtualState}/>
                     <br/> <br/>
-                    <button className="submitButtonAvaliador" onClick={this.setAtualState}>Voltar</button>
                 </ul>
             )
         }

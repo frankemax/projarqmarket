@@ -64,6 +64,15 @@ app.post('/setScore', function (req, res) {
     res.send(true)
 });
 
+app.post('/createTime', function (req, res) {
+    times["times"].push({
+        nomeTime: req.body.nome,
+        nota: []
+    })
+    res.send(true)
+    fs.writeFileSync('./src/Database/times.json', JSON.stringify(times));
+});
+
 app.post('/remove', function (req, res) {
     var id = req.body.id
     var list = alunos.alunos
