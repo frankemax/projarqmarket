@@ -6,6 +6,8 @@ var bodyParser = require('body-parser')
 const fs = require('fs');
 const app = express();
 
+
+
 // open the database
 let db = new sqlite3.Database('./src/Database/databaseTeams.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
