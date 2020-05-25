@@ -1,0 +1,46 @@
+{
+  "alunos": [
+    {
+      "nome": "lucas",
+      "id": 42,
+      "curso": "CC",
+      "time": ""
+    },
+    {
+      "nome": "schell",
+      "id": 69,
+      "curso": "ES",
+      "time": ""
+    },
+    {
+      "nome": "schell",
+      "id": 75,
+      "curso": "ES",
+      "time": ""
+    },
+    {
+      "nome": "schell",
+      "id": 25,
+      "curso": "ES",
+      "time": ""
+    },
+    {
+      "nome": "schell",
+      "id": 21,
+      "curso": "ES",
+      "time": ""
+    },
+    {
+      "nome": "schell",
+      "id": 35,
+      "curso": "ES",
+      "time": ""
+    },
+    {
+      "nome": "schell",
+      "id": 67,
+      "curso": "ES",
+      "time": ""
+    }
+  ]
+}
