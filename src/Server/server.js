@@ -1,10 +1,10 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 var cors = require('cors');
+app.use(cors());
 var bodyParser = require('body-parser')
 const fs = require('fs');
 const app = express();
-app.use(cors());
 
 // open the database
 let db = new sqlite3.Database('./src/Database/databaseTeams.db', sqlite3.OPEN_READWRITE, (err) => {
