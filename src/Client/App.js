@@ -9,14 +9,14 @@ class App extends Component {
         super(props);
 
         this.state = {
-            telaAtual: 'adm'
+            telaAtual: 'avali'
         };
 
     }
 
 
     render() {
-        if (this.state.telaAtual === 'main') {
+        if (this.state.telaAtual == 'main') {
             return (
                 <ul className="App">
                     <br/>
@@ -25,7 +25,7 @@ class App extends Component {
                 </ul>
             )
         }
-        if (this.state.telaAtual === 'adm') {
+        if (this.state.telaAtual == 'adm') {
             return (
                 <ul className="App">
                     <br/>
@@ -34,10 +34,11 @@ class App extends Component {
             )
         }
 
-        if (this.state.telaAtual === 'avali') {
+        if (this.state.telaAtual == 'avali') {
             return (
-                <ul>
+                <ul className="avaliador">
                     <br/>
+
                     <Avaliador/>
                 </ul>
 
@@ -53,6 +54,8 @@ class App extends Component {
                 </ul>
             )
         }
+
+
     }
 }
 

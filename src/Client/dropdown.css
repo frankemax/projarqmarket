@@ -5,6 +5,11 @@
     top: -30px;
 }
 
+.myDropdownMenu{
+    position: center;
+    right: -900px;
+}
+
 .Dropdown-control {
     position: relative;
     overflow: hidden;

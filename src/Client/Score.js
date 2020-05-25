@@ -17,14 +17,24 @@ class Score extends Component {
 
     }
 
+    onSubmit(){
+
+    }
+
+    onChange(event){
+        console.log(event.target.value)
+    }
+
+
+
 
     render() {
         return (
-            <li>
 
+            <li>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">{this.props.quesito}</FormLabel>
-                    <RadioGroup row aria-label="position" name="position" defaultValue="1">
+                    <RadioGroup onChange={this.onChange} row aria-label="position" name="position" defaultValue="1" >
                         <FormControlLabel
                             value="1"
                             control={<Radio color="primary"/>}
