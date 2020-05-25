@@ -60,7 +60,7 @@ class Score extends Component {
                             labelPlacement="1"
                         />
                         <FormControlLabel value="5" control={<Radio color="primary"/>} label="5"/>
-                        <button className= "submitButton" onClick={this.onSubmit}>Submit</button>
+
                     </RadioGroup>
                 </FormControl>
 
@@ -69,5 +69,5 @@ class Score extends Component {
     }
 
 }
-
+//<button className= "submitButton" onClick={this.onSubmit}>Submit</button>
 export default Score;

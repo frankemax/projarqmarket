@@ -50,7 +50,8 @@ class Avaliador extends Component {
                 <Score quesito={'Pitch'}/>
                 <Score quesito={'Inovação'}/>
                 <Score quesito={'Formação do time'}/>
-                <button className= "submitButton" onClick={this.onSubmit}>Submit</button>
+                <br/>
+                <button className= "submitButtonAvaliador" onClick={this.onSubmit}>Submit</button>
             </ui>
         );
     }

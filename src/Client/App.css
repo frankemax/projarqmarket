@@ -44,6 +44,22 @@ ul li {
   top:-65px
 
 }
+.submitButtonAvaliador {
+  background-color: #2e60e8;
+  position: relative;
+  border: none;
+  color: white;
+  padding: 7.5px 16px;
+  text-align: center;
+  height: 30px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 0px 0px;
+  cursor: pointer;
+  right: -960px;
+
+}
 
 .submitButton {
   background-color: #0690b4;
@@ -57,7 +73,6 @@ ul li {
   font-size: 10px;
   margin: 0px 0px;
   cursor: pointer;
-
 }
 
 .button {
