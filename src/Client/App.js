@@ -67,7 +67,7 @@ class App extends Component {
             return (
                 <ul>
                     <br/>
-                    <AlunoPage/>
+                    <AlunoPage setAtualState={this.setAtualState}/>
                 </ul>
             )
         }
