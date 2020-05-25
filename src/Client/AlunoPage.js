@@ -15,6 +15,12 @@ class AlunoPage extends Component {
             list: [],
             nomeNovoTime: ''
         };
+        this.backMenu = this.backMenu.bind(this)
+    }
+
+    backMenu() {
+        const {setAtualState} = this.props
+        setAtualState()
     }
 
     render() {
