@@ -21,6 +21,12 @@ class Avaliador extends Component {
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.onChangeItem = this.onChangeItem.bind(this)
+        this.backMenu = this.backMenu.bind(this)
+    }
+
+    backMenu(){
+        const {setAtualState} = this.props
+        setAtualState()
     }
 
     onChange(quesito, value) {
@@ -93,11 +99,15 @@ class Avaliador extends Component {
                 <Score onChange={this.onChange} quesito={'Pitch'}/>
                 <Score onChange={this.onChange} quesito={'Inovação'}/>
                 <Score onChange={this.onChange} quesito={'Formação do time'}/>
+                <br/>
+
                 <button className="submitButtonAvaliador" onClick={this.onSubmit}>Submit</button>
+                <br/>
+                <br/>
+                <button className="submitButtonAvaliador" onClick={this.backMenu}>Voltar</button>
             </ui>
         );
     }
-
 }
 
 export default Avaliador;

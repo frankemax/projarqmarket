@@ -152,8 +152,10 @@ class Adm extends Component {
                                 onDelete={this.onDelete}
                             />
                         </li>
+
                     )
                 })
+
             );
         }
     }
