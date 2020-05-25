@@ -34,15 +34,16 @@ class Avaliador extends Component {
         if (quesito === 'Pitch') {
             this.setState({pitch: value})
         }
-        if (quesito === 'Inovacao') {
+        if (quesito === 'Inovação') {
             this.setState({inovacao: value})
         }
-        if (quesito === 'Formacaodotime') {
+        if (quesito === 'Formação do time') {
             this.setState({formacaodotime: value})
         }
     }
 
     onSubmit() {
+        console.log(this.state)
         fetch('http://localhost:5000/setScore', {
             method: 'POST',
             headers: {
@@ -86,7 +87,7 @@ class Avaliador extends Component {
             <ui className="avaliador">
                 <br/>
                 <Dropdown className="myDropdownMenu" options={this.state.list} onChange={this.onChangeItem}
-                          value={"Times..."} placeholder="Select an option"/>
+                          value={this.state.time === '' ? 'Times...' : this.state.time} placeholder="Select an option"/>
                 <br/>
                 <Score onChange={this.onChange} quesito={'Funcionalidade'}/>
                 <Score onChange={this.onChange} quesito={'Processo'}/>

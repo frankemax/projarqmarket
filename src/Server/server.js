@@ -46,6 +46,24 @@ app.post('/setTimes', function (req, res) {
     res.send(true)
 });
 
+app.post('/setScore', function (req, res) {
+    var list = times.times
+    var aux = []
+    list.forEach(function (item) {
+        if(item.nomeTime === req.body.time){
+            aux.push(parseInt(req.body.funcionalidade))
+            aux.push(parseInt(req.body.processo))
+            aux.push(parseInt(req.body.pitch))
+            aux.push(parseInt(req.body.inovacao))
+            aux.push(parseInt(req.body.formacaodotime))
+            item.nota = aux;
+        }
+    });
+    times["times"] = list
+    fs.writeFileSync('./src/Database/times.json', JSON.stringify(times));
+    res.send(true)
+});
+
 app.post('/remove', function (req, res) {
     var id = req.body.id
     var list = alunos.alunos
