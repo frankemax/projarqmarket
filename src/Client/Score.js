@@ -11,8 +11,6 @@ class Score extends Component {
 
     constructor(props) {
         super(props);
-
-        console.log(this.props)
         this.onChange = this.onChange.bind(this)
     }
 
@@ -25,7 +23,13 @@ class Score extends Component {
             <li>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">{this.props.quesito}</FormLabel>
-                    <RadioGroup onChange={this.onChange} row aria-label="position" name="position" defaultValue="1" >
+                    <RadioGroup onChange={this.onChange} row aria-label="position" name="position" defaultValue="0" >
+                        <FormControlLabel
+                            value="0"
+                            control={<Radio color="primary"/>}
+                            label="0"
+                            labelPlacement="1"
+                        />
                         <FormControlLabel
                             value="1"
                             control={<Radio color="primary"/>}
@@ -50,6 +54,7 @@ class Score extends Component {
                             label="4"
                             labelPlacement="1"
                         />
+
                         <FormControlLabel value="5" control={<Radio color="primary"/>} label="5"/>
 
                     </RadioGroup>

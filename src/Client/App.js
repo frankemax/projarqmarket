@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Adm from './Adm';
 import Avaliador from "./Avaliador";
+import AlunoPage from "./AlunoPage";
 
 
 class App extends Component {
@@ -9,48 +10,65 @@ class App extends Component {
         super(props);
 
         this.state = {
-            telaAtual: 'avali'
+            telaAtual: 'main'
         };
+        this.handleData = this.handleData.bind(this)
+        this.setAtualState = this.setAtualState.bind(this)
 
+    }
+
+    setAtualState() {
+        this.setState({telaAtual: "main"})
+
+    }
+
+    handleData(event) {
+
+        this.setState({telaAtual: event.currentTarget.textContent})
+        console.log(event.currentTarget.textContent)
     }
 
 
     render() {
         if (this.state.telaAtual === 'main') {
             return (
-                <ul className="App">
+                <ul className="App2">
                     <br/>
-
-                    <Adm/>
+                    <ul className="App2">
+                        <button className="button" onClick={this.handleData}>Avaliador</button>
+                        <br/>
+                        <button className="button" onClick={this.handleData}>Administrador</button>
+                        <br/>
+                        <button className="button" onClick={this.handleData}>Aluno</button>
+                    </ul>
                 </ul>
             )
         }
-        if (this.state.telaAtual === 'adm') {
+        if (this.state.telaAtual === 'Administrador') {
             return (
                 <ul className="App">
                     <br/>
-                    <Adm/>
+                    <Adm setAtualState={this.setAtualState}/>
+                    <br/> <br/>
+                    <button className="submitButtonAvaliador" onClick={this.backMenu}>Voltar</button>
                 </ul>
             )
         }
 
-        if (this.state.telaAtual === 'avali') {
+        if (this.state.telaAtual === 'Avaliador') {
             return (
                 <ul className="avaliador">
                     <br/>
-
                     <Avaliador/>
                 </ul>
-
-
             )
         }
 
-        if (this.state.telaAtual === 'aluno') {
+        if (this.state.telaAtual === 'Aluno') {
             return (
                 <ul className="App">
                     <br/>
-                    <Adm/>
+                    <AlunoPage/>
                 </ul>
             )
         }
