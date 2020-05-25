@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './App.css';
 import Adm from './Adm';
 import Avaliador from "./Avaliador";
-import AlunoPage from "./AlunoPage";
 
 
 class App extends Component {
@@ -19,7 +18,6 @@ class App extends Component {
 
     setAtualState() {
         this.setState({telaAtual: "main"})
-
     }
 
     handleData(event) {
@@ -50,7 +48,7 @@ class App extends Component {
                     <br/>
                     <Adm setAtualState={this.setAtualState}/>
                     <br/> <br/>
-                    <button className="submitButtonAvaliador" onClick={this.backMenu}>Voltar</button>
+                    <button className="submitButtonAvaliador" onClick={this.setAtualState}>Voltar</button>
                 </ul>
             )
         }
@@ -59,7 +57,7 @@ class App extends Component {
             return (
                 <ul className="avaliador">
                     <br/>
-                    <Avaliador/>
+                    <Avaliador setAtualState={this.setAtualState}/>
                 </ul>
             )
         }
@@ -68,7 +66,6 @@ class App extends Component {
             return (
                 <ul className="App">
                     <br/>
-                    <AlunoPage/>
                 </ul>
             )
         }

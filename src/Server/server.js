@@ -56,7 +56,7 @@ app.post('/setScore', function (req, res) {
             aux.push(parseInt(req.body.pitch))
             aux.push(parseInt(req.body.inovacao))
             aux.push(parseInt(req.body.formacaodotime))
-            item.nota = aux;
+            item.nota.push(aux);
         }
     });
     times["times"] = list

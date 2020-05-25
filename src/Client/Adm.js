@@ -20,6 +20,12 @@ class Adm extends Component {
         this.getTimes = this.getTimes.bind(this);
         this.setTime = this.setTime.bind(this);
         this.createTime = this.createTime.bind(this);
+        this.backMenu = this.backMenu.bind(this)
+    }
+
+    backMenu() {
+        const {setAtualState} = this.props
+        setAtualState()
     }
 
     remove(arr, attr, value) {
@@ -119,7 +125,7 @@ class Adm extends Component {
         })
     }
 
-    onSubmit(id,time) {
+    onSubmit(id, time) {
         fetch('http://localhost:5000/setTimes', {
             method: 'POST',
             headers: {
@@ -152,10 +158,8 @@ class Adm extends Component {
                                 onDelete={this.onDelete}
                             />
                         </li>
-
                     )
                 })
-
             );
         }
     }

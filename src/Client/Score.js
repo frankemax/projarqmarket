@@ -18,6 +18,7 @@ class Score extends Component {
         const {onChange} = this.props
         onChange(this.props.quesito, event.target.value)
     }
+
     render() {
         return (
             <li>
