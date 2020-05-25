@@ -4,43 +4,50 @@
       "nome": "lucas",
       "id": 42,
       "curso": "CC",
-      "time": "Time7"
+      "time": "naruto",
+      "opcao": "Time7"
     },
     {
       "nome": "schell",
       "id": 69,
       "curso": "ES",
-      "time": "sharingan"
+      "time": "Time7",
+      "opcao": "Time7"
     },
     {
       "nome": "schell",
       "id": 75,
       "curso": "ES",
-      "time": ""
+      "time": "",
+      "opcao": "Time7"
     },
     {
       "nome": "schell",
       "id": 25,
       "curso": "ES",
-      "time": "nata"
+      "time": "nata",
+      "opcao": "Time7"
     },
     {
       "nome": "schell",
       "id": 21,
       "curso": "ES",
-      "time": "Time7"
+      "time": "Time7",
+      "opcao": "Time7"
     },
     {
       "nome": "schell",
       "id": 35,
       "curso": "ES",
-      "time": "nata"
+      "time": "nata",
+      "opcao": "Time7"
     },
     {
       "nome": "schell",
       "id": 67,
       "curso": "ES",
-      "time": "nata"
+      "time": "nata",
+      "opcao": "Time7"
     }
   ]
 }

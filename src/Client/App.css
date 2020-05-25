@@ -96,6 +96,11 @@ ulli2 {
   position: absolute;
   right: 960px;
 }
+.inputLabel2 {
+  position: absolute;
+  right: 750px;
+  top:120px;
+}
 
 .buttonCriaTime {
   position: relative;

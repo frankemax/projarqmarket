@@ -25,11 +25,16 @@ class AlunoPage extends Component {
 
     render() {
         return (
-            <ui className="avaliador">
-                <TextField className="MuiTextField-root" id="outlined-basic" size="small"  label="Digite a sua matrícula"/>
+            <ui className>
+                <input className="inputLabel2"
+                       onChange={this.handleNome}
+                       placeholder="Nome do time"
+                       type='text'
+                       value={this.state.nomeNovoTime}
+                />
 
 
-                <Dropdown className="myDropdownMenu" onChange={this.onChange}  placeholder="Times..."/>
+                <Dropdown className="myDropdownMenuAlunoPage" onChange={this.onChange}  placeholder="Times..."/>
 
                 <button className="buttonAlunoPage1" onClick={this.onSubmit}>Confirmar</button>
                 <br/>

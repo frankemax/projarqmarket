@@ -10,8 +10,9 @@
     right: -900px;
 }
 .myDropdownMenuAlunoPage{
-    top:-50px;
+    position: center;
     right: -900px;
+    top: 50px;
 }
 
 .Dropdown-control {
