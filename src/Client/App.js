@@ -9,7 +9,7 @@ class App extends Component {
 
         return (
             <ul className="App">
-                <text>aaa</text>
+                <br/>
                 <Adm/>
             </ul>
         )

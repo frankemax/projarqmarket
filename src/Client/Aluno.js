@@ -3,8 +3,6 @@ import './dropdown.css';
 import Dropdown from 'react-dropdown';
 
 
-
-
 class Aluno extends Component {
 
     constructor(props) {

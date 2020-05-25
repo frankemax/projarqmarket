@@ -18,6 +18,7 @@ class Adm extends Component {
         this.getAlunos = this.getAlunos.bind(this);
         this.getTimes = this.getTimes.bind(this);
         this.setTime = this.setTime.bind(this);
+        this.createTime = this.createTime.bind(this);
     }
 
     onSubmit(event) {
@@ -64,7 +65,7 @@ class Adm extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.text()).then(res => {
-            this.setState({alunos: JSON.parse(res).a})
+            this.setState({alunos: JSON.parse(res).alunos})
             console.log(this.state.alunos)
         })
     }
@@ -76,7 +77,7 @@ class Adm extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.text()).then(res => {
-            this.setState({times: JSON.parse(res).a})
+            this.setState({times: JSON.parse(res).times})
             console.log(this.state.times)
         })
     }
