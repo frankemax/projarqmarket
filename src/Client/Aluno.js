@@ -43,7 +43,7 @@ class Aluno extends Component {
 
                 <Dropdown className='myDropdown-menu' options={list} onChange={this.onChange}
                           value={time !== '' ? time : this.state.time}
-                          placeholder="Select an option"/>
+                          placeholder="Sem time"/>
                 <span> <button className="sButton" onClick={this.onSubmit}>Confirmar</button></span>
                 <span> <button className="buttonR" onClick={this.onDelete}>Remover</button></span>
             </div>
