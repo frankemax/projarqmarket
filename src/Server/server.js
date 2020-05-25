@@ -34,13 +34,21 @@ app.post('/setTimes', function (req, res) {
     var id = req.body.id
     var time = req.body.time
     var list = alunos.alunos
-    list.forEach(function (item, index) {
+    list.forEach(function (item) {
         if(item.id === id){
             item.time = time
         }
     });
     alunos["alunos"] = list
     fs.writeFileSync('./src/Database/alunos.json', JSON.stringify(alunos));
+    var list = times.times
+    list.forEach(function (item) {
+        if(item.nomeTime === time){
+            item.integrantes.push(id)
+        }
+    });
+    times["times"] = list
+    fs.writeFileSync('./src/Database/times.json', JSON.stringify(times));
     res.send(true)
 });
 
@@ -79,6 +87,7 @@ app.post('/setScore', function (req, res) {
 app.post('/createTime', function (req, res) {
     times["times"].push({
         nomeTime: req.body.nome,
+        integrantes: [],
         nota: []
     })
     res.send(true)
@@ -90,6 +99,7 @@ app.post('/remove', function (req, res) {
     var list = alunos.alunos
     remove(list, 'id', id);
     alunos["alunos"] = list
+    res.send(true)
     fs.writeFileSync('./src/Database/alunos.json', JSON.stringify(alunos));
 });
 
