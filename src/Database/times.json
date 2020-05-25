@@ -1,1 +1,4 @@
-{"times":[{"nomeTime":"nata","integrantes":[69],"nota":[[5,4,5,4,5]]},{"nomeTime":"Time7","integrantes":[25,42,75,42,75,42,35,35,35,35,35,35,35,35,35,42],"nota":[[5,5,5,5,5]]},{"nomeTime":"naruto","integrantes":[42],"nota":[]},{"nomeTime":"sharingan","integrantes":[42,42],"nota":[[0,0,0,0,0],[3,4,2,3,0]]},{"nomeTime":"akatsuki","integrantes":[67,67,35],"nota":[]},{"nomeTime":"test","integrantes":[],"nota":[]},{"nomeTime":"teste","integrantes":[],"nota":[]},{"nomeTime":"testee","integrantes":[],"nota":[]}]}
+
+{	{"times":[{"nomeTime":"nata","integrantes":[],"nota":[[5,4,5,4,5]]},{"nomeTime":"Time7","integrantes":[25,42],"nota":[[5,5,5,5,5]]},{"nomeTime":"naruto","integrantes":[],"nota":[]},{"nomeTime":"sharingan","integrantes":[42],"nota":[]},{"nomeTime":"akatsuki","integrantes":[],"nota":[]},{"nomeTime":"test","integrantes":[],"nota":[]},{"nomeTime":"teste","integrantes":[],"nota":[]},{"nomeTime":"testee","integrantes":[],"nota":[]}]} 
+  "times": [	
+    {	
